@@ -85,5 +85,5 @@ First, create a `jupyter` notebook to plot things:
 docker run --rm -it -v ${PWD}:${PWD} -w ${PWD}  -p 8888:8888 srappoccio/mlanalysis:latest
 ```
 
-Then open and run this script: 
+Then open and run [this script](https://github.com/ubsuny/PHY522/blob/main/jet_plotting_example_uproot.ipynb).  
 
