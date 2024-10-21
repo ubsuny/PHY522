@@ -23,12 +23,19 @@ and `root` [link](https://root.cern) together.
 
 Execute these commands to download the correct software environment and docker image
 
+
+* Run once: 
 ```
 git clone https://github.com/ubsuny/PHY522.git
 cd PHY522
 docker pull srappoccio/rivet-pythia-uproot:latest
+```
+* Run every time you want to run a job:
+```
 docker run --rm -it -v ${PWD}:${PWD} -w ${PWD} --entrypoint "/bin/bash" -p 8888:8888 srappoccio/rivet-pythia-uproot:latest
 ```
+
+You will then be taken to the virtual environment for the `rivet-pythia-uproot` example, which is based on the [hepstore/rivet-pythia](https://hub.docker.com/r/hepstore/rivet-pythia) docker image from `rivet`, which is ultimately an `Ubuntu` image with several HEP-related libraries. 
 
 ## Compile the software
 
