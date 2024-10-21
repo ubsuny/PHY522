@@ -74,3 +74,16 @@ and to run the example over 1000 events and make the output `root` file:
 ```
 ./pythia2root qcd_multijets.cfg qcd_multijets.root 1000
 ```
+
+
+## Make some plots with `uproot`
+
+Now we will make some plots using the `uproot` software package and `matplotlib`. 
+
+First, create a `jupyter` notebook to plot things: 
+```
+docker run --rm -it -v ${PWD}:${PWD} -w ${PWD}  -p 8888:8888 srappoccio/mlanalysis:latest
+```
+
+Then open and run this script: 
+
