@@ -59,8 +59,10 @@ An example is provided in `qcd_multijets.cfg`, containing this text:
 
 ```
 HardQCD:all = on
-PhaseSpace:pTHatMin = 100
+PhaseSpace:pTHatMin = 10
 ```
+
+This will create QCD multijet events with a minimum $\hat{p_T}$ of 10 GeV. 
 
 To run the example over 10 events and print out verbose information:
 
