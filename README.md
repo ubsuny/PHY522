@@ -50,8 +50,8 @@ usage: ./pythia2fastjet config_file n_events (verbose?)
 ```
 
 ```
-$ ./pythia2fastjet
-usage: ./pythia2fastjet config_file n_events (verbose?)
+$ ./pythia2root
+usage: ./pythia2root config_file root_file n_events <optional: seed (-1 = default, 0=use time, or input your own)> <optional: ptcut>
 ```
 
 
@@ -62,5 +62,15 @@ HardQCD:all = on
 PhaseSpace:pTHatMin = 100
 ```
 
+To run the example over 10 events and print out verbose information:
+
+```
+./pythia2fastjet qcd_multijets.cfg 10 1
+```
+
+and to run the example over 1000 events and make the output `root` file:
 
 
+```
+./pythia2root qcd_multijets.cfg qcd_multijets.root 1000
+```
