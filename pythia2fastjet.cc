@@ -33,7 +33,7 @@ int main(int argc, char ** argv) {
 
   
   // Define the AK8 jet finder.
-  double R = 0.8, ptmin = 170.0, lepfrac = 0.9;
+  double R = 0.8, ptmin = 50.0, lepfrac = 0.9;
   fastjet::JetDefinition jet_def(fastjet::antikt_algorithm, R);
 
   // Define some groomed jets: soft drop beta=0 (mmdt), beta=1, beta=2

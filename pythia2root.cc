@@ -46,7 +46,7 @@ int main(int argc, char ** argv) {
 
 
   // Define the AK8 jet finder.
-  double R = 0.8, ptmin = 30.0, lepfrac = 0.9;
+  double R = 0.8, ptmin = 50.0, lepfrac = 0.9;
   fastjet::JetDefinition jet_def(fastjet::antikt_algorithm, R);
 
   bool verbose = false;
