@@ -14,7 +14,7 @@ and `root` [link](https://root.cern) together.
 ## Details of physics selection
 
    * Events will be simulated with `pythia` as per the user-supplied configuration. An example `qcd_multijets.cfg` is provided. 
-   * Jets will be constructed with the anti-k$_T$ jet algorithm with R=0.8 [JHEP 0804:063,2008](https://arxiv.org/abs/0802.1189). A minimum jet $p_T$ cut is applied of 50 GeV. 
+   * Jets will be constructed with the anti-$k_T$ jet algorithm with R=0.8 [JHEP 0804:063,2008](https://arxiv.org/abs/0802.1189). A minimum jet $p_T$ cut is applied of 50 GeV. 
    * The clustered AK8 jets will then be reclustered with the soft drop algorithm [JHEP 1405 (2014) 146](https://arxiv.org/abs/1402.2657) with various $\beta$ parameters and $z_{cut}=0.1$. 
    * To avoid confusion, jets that contain 90\% of their energy from electrons or muons are not considered as jets.
    * Various n-subjettiness variables are also calculated [JHEP 1103:015,2011](https://arxiv.org/abs/1011.2268) . 
