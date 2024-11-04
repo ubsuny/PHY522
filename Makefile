@@ -28,7 +28,7 @@ ifneq ("$(wildcard ../lib/libpythia8.*)","")
 endif
 CXX_COMMON:=-I$(PREFIX_INCLUDE) $(CXX_COMMON)
 CXX_COMMON+= -L$(PREFIX_LIB) -Wl,-rpath,$(PREFIX_LIB) -ldl -g -std=c++20
-CXX_ALL:=CXX_COMMON
+CXX_ALL:=$(CXX_COMMON)
 CXX_ALL+= -lpythia8
 
 ################################################################################
