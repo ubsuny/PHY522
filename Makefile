@@ -27,7 +27,9 @@ ifneq ("$(wildcard ../lib/libpythia8.*)","")
   PREFIX_INCLUDE=../include
 endif
 CXX_COMMON:=-I$(PREFIX_INCLUDE) $(CXX_COMMON)
-CXX_COMMON+= -L$(PREFIX_LIB) -Wl,-rpath,$(PREFIX_LIB) -lpythia8 -ldl -g -std=c++20
+CXX_COMMON+= -L$(PREFIX_LIB) -Wl,-rpath,$(PREFIX_LIB) -ldl -g -std=c++20
+CXX_ALL:=CXX_COMMON
+CXX_ALL+= -lpythia8
 
 ################################################################################
 # RULES: Definition of the rules used to build the PYTHIA examples.
@@ -54,7 +56,7 @@ $(PREFIX_LIB)/libpythia8.so :
 
 pythia2root: $$@.cc $(PREFIX_LIB)/libpythia8.a pythia2root.so
 ifeq ($(FASTJET3_USE)$(ROOT_USE),truetrue)
-	$(CXX) $< pythia2root.so -o $@ -w -I$(ROOT_INCLUDE) -I$(FASTJET3_INCLUDE) $(CXX_COMMON)\
+	$(CXX) $< pythia2root.so -o $@ -w -I$(ROOT_INCLUDE) -I$(FASTJET3_INCLUDE) $(CXX_ALL)\
 	 -L$(FASTJET3_LIB) -Wl,-rpath,$(FASTJET3_LIB) -lfastjet -lRecursiveTools -lNsubjettiness -lfastjettools \
 	 `$(ROOTBIN)root-config --cflags` -Wl,-rpath,./\
 	 -Wl,-rpath,$(ROOT_LIB) `$(ROOT_BIN)root-config --glibs`
@@ -63,7 +65,7 @@ else
 endif
 
 pythia2root.so: pythia2rootDct.cc $(PREFIX_LIB)/libpythia8.a
-	$(CXX) $< -o $@ -c -w -I$(ROOT_INCLUDE) $(CXX_SHARED) $(CXX_COMMON) -pthread -std=c++17 -m64 -L$(ROOT_LIB) -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -pthread -Wl,-rpath,$(ROOT_LIB) -lm -ldl -rdynamic
+	$(CXX) $< -o $@ -c -w -I$(ROOT_INCLUDE) $(CXX_SHARED) $(CXX_ALL) -pthread -std=c++17 -m64 -L$(ROOT_LIB) -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -pthread -Wl,-rpath,$(ROOT_LIB) -lm -ldl -rdynamic
 #`$(ROOT_BIN)root-config --cflags` `$(ROOT_BIN)root-config --glibs` 
 pythia2rootDct.cc: pythia2root.h pythia2rootLinkDef.h
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(ROOT_LIB);\
@@ -71,7 +73,7 @@ pythia2rootDct.cc: pythia2root.h pythia2rootLinkDef.h
 
 pythia2fastjet: $$@.cc $(PREFIX_LIB)/libpythia8.a 
 ifeq ($(FASTJET3_USE),true)
-	$(CXX) $< -o $@ -w -I$(FASTJET3_INCLUDE) $(CXX_COMMON)\
+	$(CXX) $< -o $@ -w -I$(FASTJET3_INCLUDE) $(CXX_ALL)\
 	 -L$(FASTJET3_LIB) -Wl,-rpath,$(FASTJET3_LIB) -lfastjet -lRecursiveTools -lNsubjettiness -lfastjettools \
 	 -Wl,-rpath,./
 else
@@ -91,7 +93,7 @@ endif
 
 # Internally used tests, without external dependencies.
 test% : test%.cc $(PREFIX_LIB)/libpythia8.a
-	$(CXX) $< -o $@ $(CXX_COMMON) $(GZIP_INC) $(GZIP_FLAGS)
+	$(CXX) $< -o $@ $(CXX_ALL) $(GZIP_INC) $(GZIP_FLAGS)
 
 # Clean.
 clean:
