@@ -62,17 +62,12 @@ else
 	@echo "Error: $@ requires ROOT"
 endif
 
-
 pythia2root.so: pythia2rootDct.cc $(PREFIX_LIB)/libpythia8.a
 	$(CXX) $< -o $@ -c -w -I$(ROOT_INCLUDE) $(CXX_SHARED) $(CXX_COMMON) -pthread -std=c++17 -m64 -L$(ROOT_LIB) -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -pthread -Wl,-rpath,$(ROOT_LIB) -lm -ldl -rdynamic
 #`$(ROOT_BIN)root-config --cflags` `$(ROOT_BIN)root-config --glibs` 
 pythia2rootDct.cc: pythia2root.h pythia2rootLinkDef.h
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(ROOT_LIB);\
 	 $(ROOT_BIN)rootcint -f $@ -c -I$(PREFIX_INCLUDE) $^
-
-
-
-
 
 pythia2fastjet: $$@.cc $(PREFIX_LIB)/libpythia8.a 
 ifeq ($(FASTJET3_USE),true)
@@ -82,6 +77,17 @@ ifeq ($(FASTJET3_USE),true)
 else
 	@echo "Error: $@ requires fastjet"
 endif
+
+
+fastjet_example_bare: $$@.cc 
+ifeq ($(FASTJET3_USE),true)
+	$(CXX) $< -o $@ -w -I$(FASTJET3_INCLUDE) $(CXX_COMMON)\
+	 -L$(FASTJET3_LIB) -Wl,-rpath,$(FASTJET3_LIB) -lfastjet -lRecursiveTools -lNsubjettiness -lfastjettools \
+	 -Wl,-rpath,./
+else
+	@echo "Error: $@ requires fastjet"
+endif
+
 
 # Internally used tests, without external dependencies.
 test% : test%.cc $(PREFIX_LIB)/libpythia8.a
