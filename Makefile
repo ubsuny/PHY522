@@ -27,7 +27,7 @@ ifneq ("$(wildcard ../lib/libpythia8.*)","")
   PREFIX_INCLUDE=../include
 endif
 CXX_COMMON:=-I$(PREFIX_INCLUDE) $(CXX_COMMON)
-CXX_COMMON+= -L$(PREFIX_LIB) -Wl,-rpath,$(PREFIX_LIB) -lpythia8 -ldl -g
+CXX_COMMON+= -L$(PREFIX_LIB) -Wl,-rpath,$(PREFIX_LIB) -lpythia8 -ldl -g -std=c++20
 
 ################################################################################
 # RULES: Definition of the rules used to build the PYTHIA examples.
