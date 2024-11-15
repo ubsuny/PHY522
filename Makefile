@@ -54,16 +54,6 @@ $(PREFIX_LIB)/libpythia8.so :
                 in the top PYTHIA directory)
 
 
-pythia2root: $$@.cc $(PREFIX_LIB)/libpythia8.a pythia2root.so
-ifeq ($(FASTJET3_USE)$(ROOT_USE),truetrue)
-	$(CXX) $< pythia2root.so -o $@ -w -I$(ROOT_INCLUDE) -I$(FASTJET3_INCLUDE) $(CXX_ALL)\
-	 -L$(FASTJET3_LIB) -Wl,-rpath,$(FASTJET3_LIB) -lfastjet -lRecursiveTools -lNsubjettiness -lfastjettools \
-	 `$(ROOTBIN)root-config --cflags` -Wl,-rpath,./\
-	 -Wl,-rpath,$(ROOT_LIB) `$(ROOT_BIN)root-config --glibs`
-else
-	@echo "Error: $@ requires ROOT"
-endif
-
 pythia2root.so: pythia2rootDct.cc $(PREFIX_LIB)/libpythia8.a
 	$(CXX) $< -o $@ -c -w -I$(ROOT_INCLUDE) $(CXX_SHARED) $(CXX_ALL) -pthread -std=c++17 -m64 -L$(ROOT_LIB) -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -pthread -Wl,-rpath,$(ROOT_LIB) -lm -ldl -rdynamic
 #`$(ROOT_BIN)root-config --cflags` `$(ROOT_BIN)root-config --glibs` 
@@ -89,6 +79,11 @@ ifeq ($(FASTJET3_USE),true)
 else
 	@echo "Error: $@ requires fastjet"
 endif
+
+
+clustering: $$@.cc
+	$(CXX) $< -o $@ -w -I$(FASTJET3_INCLUDE) -I$(ROOT_INCLUDE) $(CXX_SHARED) $(CXX_ALL) -pthread -std=c++17 -m64 -L$(ROOT_LIB) -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -pthread -Wl,-rpath,$(ROOT_LIB) -lm -ldl -rdynamic -L$(FASTJET3_LIB) -Wl,-rpath,$(FASTJET3_LIB) -lfastjet -lRecursiveTools -lNsubjettiness -lfastjettools -Wl,-rpath,./
+
 
 
 # Internally used tests, without external dependencies.
