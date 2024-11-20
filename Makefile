@@ -82,7 +82,7 @@ endif
 
 
 clustering: $$@.cc
-	$(CXX) $< -o $@ -w -I$(FASTJET3_INCLUDE) -I$(HOTVR_INCLUDE) -I$(ROOT_INCLUDE) $(CXX_SHARED) $(CXX_ALL) -pthread -std=c++17 -m64 -L$(ROOT_LIB) -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -pthread -Wl,-rpath,$(ROOT_LIB) -lm -ldl -rdynamic -L$(FASTJET3_LIB) -Wl,-rpath,$(FASTJET3_LIB) -lfastjet -lRecursiveTools -lNsubjettiness -lfastjettools -Wl,-rpath,./ -L$(HOTVR_LIB) -Wl,-rpath,$(HOTVR_LIB) -lHOTVR
+	$(CXX) $< -o $@ -w -I$(FASTJET3_INCLUDE) -I$(ROOT_INCLUDE) $(CXX_SHARED) $(CXX_ALL) -pthread -std=c++17 -m64 -L$(ROOT_LIB) -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -pthread -Wl,-rpath,$(ROOT_LIB) -lm -ldl -rdynamic -L$(FASTJET3_LIB) -Wl,-rpath,$(FASTJET3_LIB) -lfastjet -lRecursiveTools -lNsubjettiness -lfastjettools 
 
 
 

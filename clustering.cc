@@ -13,9 +13,6 @@
 #include "fastjet/contrib/Nsubjettiness.hh" // In external code, this should be fastjet/contrib/Nsubjettiness.hh
 #include "fastjet/contrib/Njettiness.hh"
 #include "fastjet/contrib/NjettinessPlugin.hh"
-#include "HOTVRinfo.hh"
-#include "HOTVR.hh"
-
 
 // ROOT, for saving Pythia events as trees in a file.
 #include "TTree.h"
