@@ -86,3 +86,11 @@ PYTHON_USE=true
 PYTHON_BIN=/usr/bin/
 PYTHON_INCLUDE=/usr/include/python3.8
 PYTHON_LIB=/usr/lib
+
+
+
+# HOTVR configuration.
+HOTVR_USE=true
+HOTVR_BIN=./HOTVRContrib
+HOTVR_INCLUDE=./HOTVRContrib
+HOTVR_LIB=./HOTVRContrib

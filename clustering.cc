@@ -13,6 +13,8 @@
 #include "fastjet/contrib/Nsubjettiness.hh" // In external code, this should be fastjet/contrib/Nsubjettiness.hh
 #include "fastjet/contrib/Njettiness.hh"
 #include "fastjet/contrib/NjettinessPlugin.hh"
+#include "HOTVRinfo.hh"
+#include "HOTVR.hh"
 
 
 // ROOT, for saving Pythia events as trees in a file.
@@ -38,6 +40,9 @@ int main(int argc, char ** argv) {
   double z_cut = 0.10;
   double beta  = 0.0;
   fastjet::contrib::SoftDrop sd(beta, z_cut);
+
+  // HOTVR configuration
+  
 
   // Set up the ROOT TFile and TTree.
   TFile *file = TFile::Open(infile);
