@@ -27,7 +27,7 @@ int main(int argc, char ** argv) {
 
 
   // Define the AK8 jet finder.
-  double R = 0.8, ptmin = 50.0;
+  double R = 0.8, ptmin = 20.0;
   fastjet::JetDefinition jet_def(fastjet::antikt_algorithm, R);
 
   bool verbose = false;
@@ -136,7 +136,21 @@ int main(int argc, char ** argv) {
  // Begin event loop. Generate event; skip if generation aborted.
   for (int iEvent = 0; iEvent < T->GetEntries(); ++iEvent) {
     T->GetEntry(iEvent);
+
+    // Create the list of input 4-vectors
+    std::vector<fastjet::PseudoJet> inputs(nConstituent);
+    for ( auto i = 0; i < nConstituent; ++i ){
+      fastjet::PseudoJet ijet;
+      ijet.reset_PtYPhiM( constituent_pt[i], constituent_eta[i], constituent_phi[i], constituent_m[i] );
+      ijet.set_user_index( i );
+      inputs.emplace_back( ijet );
+    }
+    // Define the cluster sequence
+    fastjet::ClusterSequence cs(inputs, jet_def);
+    // Cluster the jets
+    std::vector<fastjet::PseudoJet> jets = fastjet::sorted_by_pt(cs.inclusive_jets(ptmin));
     std::cout << "nConstituent = " << nConstituent << std::endl;
+    std::cout << "jets.size() = " << jets.size() << std::endl;
   }
 
   file->Close();
